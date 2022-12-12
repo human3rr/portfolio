@@ -2,4 +2,25 @@
     border: 3px solid #cecee0;
     background-color: transparent;
     border-radius: 10px;
+    margin: 10px;
+}
+
+@keyframes fadeIn { 
+    0% {
+      opacity: 0;
+    }
+  
+    100% {
+      opacity: 1;
+    }
+  }
+  
+.responseButton{
+    height: auto;
+    width: auto;
+    margin: 5px;
+    border-color: black;
+    color: #cecee0;
+    background-color: transparent;
+    animation: fadeIn 4s;
 }
