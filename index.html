@@ -16,12 +16,13 @@
     
        body {
          background-color: #10101a;
-         display: flex;
+         /*display: flex;*/
          justify-content: center;
          align-items: center;
          width: 100%;
          height: 100%;
          overflow: hidden;
+         z-index: -2;
        }
     
     
@@ -38,6 +39,7 @@
          animation-duration: .5s;
          animation-timing-function: linear;
          animation-iteration-count: infinite;
+         z-index: -1;
        }
     
        @keyframes rain {
@@ -53,16 +55,37 @@
       </style>
 </head>
 <body>
-    <div class="profileBorder">
-        <img class="robotProfile" width="100" height="100"><br>
+    <div>
+        <div class="mainProfile">
+            <div class="profileBorder">
+                <img class="robotProfile" width="100" height="100"><br>
+            </div>
+            <p class="robotName">Human3rr</p>
+        </div>
+        <div class="dialogBox"></div>
     </div>
-    <div class="dialogBox"></div>
-    <button class="responseButton" type="button">Where am I?</button>
+    <div>
+        <div class="visitorProfile">
+            <div class="profileBorder">
+                <img class="visitorProfileImg" width="100" height="100"><br>
+            </div>
+            <p class="hoodedName">Nameless</p>
+        </div>
+        <div class="dialogBox"></div>
+    </div>
+    <label class="responseButton">
+        <button type="button" class="whoAreYou">Who are you?</button>
+        <button type="button" class="aboutYourself">Tell me about yourself.</button>
+        <button type="button" class="whatPowersDoYouHave">What powers do you have?</button>
+        <button type="button" class="showMeWhatYouGot">Show me what you can do.</button>
+        <button type="button" class="whatTimeIsIt">Tell me the time.</button>
+    </label>
+      
 </body>
 <script type="text/javascript">
 
     let hrElement;
-    let counter = 1000;
+    let counter = 200;
     for (let i = 0; i < counter; i++) {
       hrElement = document.createElement("HR");
       
