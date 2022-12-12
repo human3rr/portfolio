@@ -12,7 +12,7 @@ let textPrompts = [
 
 let dialogBox = document.querySelector('.dialogBox')
 dialogBox.innerHTML = ""
-dialogBox.style.backgroundColor = "#0B0B12";   
+dialogBox.style.backgroundColor = "transparent";   
 dialogBox.style.height = "50px";   
 dialogBox.style.width = "400px";   
 dialogBox.style.color = "#cecee0";   
