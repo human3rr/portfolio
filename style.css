@@ -1,21 +1,72 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+:root {
+    --main-txt-color: #cecee0;
+}
+  
+body {
+    background-color: #10101a;
+    /*display: flex;*/
+    /*justify-content: center;
+    align-items: center;*/
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: -2;
+    color: var(--main-txt-color);
+}
+.container{
+    display: grid;
+    align-items: center;
+    justify-items: center;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 50vh 1fr;
+}
+
+hr {
+    width: 1px;
+    border-color: transparent;
+    border-right-color: rgba(94, 93, 96, 0.863);
+    border-right-width: 5px;
+    position: absolute;
+    bottom: 100%;
+    transform-origin: 100% 50%;
+    animation-name: rain;
+    animation-duration: .5s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    z-index: -1;
+}
+
+@keyframes rain {
+    from {
+        transform: rotate(90deg) translateX(0);
+    } 
+    to {
+        transform: rotate(90deg) translateX(calc(100vh));
+    }
+}
+
+@keyframes fadeIn { 
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
 .profileBorder{
-    border: 3px solid #cecee0;
+    border: 3px solid var(--main-txt-color);
     background-color: transparent;
     border-radius: 10px;
     margin-right: 10px;
     margin-bottom: 5px;
     width: fit-content;
 }
-
-@keyframes fadeIn { 
-    0% {
-      opacity: 0;
-    }
-  
-    100% {
-      opacity: 1;
-    }
-  }
 
 .responseButton{
     display: none;
@@ -26,10 +77,26 @@
     display:block;
     margin: 5px;
     border-color: black;
-    color: #cecee0;
+    color: var(--main-txt-color);
     background-color: transparent;
     animation: fadeIn 2s;
 }
+.visitorSection{
+    animation: fadeIn 2s;
+}
+.robotSection{
+    visibility: hidden;
+    justify-self: stretch;
+    border: 1rem solid;
+    width: fit-content;
+}
+.robotSection.RSActive{
+    visibility: visible;
+    animation: fadeIn 2s;
+    justify-self: stretch;
+
+}
+
 /*.profileBorder{
     border: dashed red;
 }
@@ -37,7 +104,7 @@
     border: dashed red;
 }*/
 .robotName{
-    color:#cecee0;
+    color: var(--main-txt-color);
     /*border: dashed red;*/
     text-align: center;
     width:fit-content;

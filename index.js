@@ -3,17 +3,36 @@
     It's unexpected to receive visiters this time of year
 */
 
+//Logic for rain elements
+let hrElement;
+let counter = 200;
+for (let i = 0; i < counter; i++) {
+  hrElement = document.createElement("HR");
+  
+    hrElement.style.left = Math.floor(Math.random() * window.innerWidth) + "px";
+    hrElement.style.animationDuration = 2.2 + Math.random() * 0.9 + "s";
+    hrElement.style.animationDelay = Math.random() * 10 + "s";
+ 
+  document.body.appendChild(hrElement);
+}
+
+//Robot Section fade in
+let robotSection = document.querySelector('.robotSection')
+
+setTimeout(() => {
+    robotSection.classList.add("RSActive")
+}, 1000)
 
 //Animate Character speech
 let mainCharacterProfile = document.querySelector('.robotProfile')
-mainCharacterProfile.src = "robotCroppedFace5.png";
+mainCharacterProfile.src = "robotPx.png";
 mainCharacterProfile.style.marginBottom = '-4px';
 mainCharacterProfile.style.marginLeft = '3px';
 let characterMovement = 0
 
 //Animate visitor speech
 let hoodedCharacterProfile = document.querySelector('.visitorProfileImg')
-hoodedCharacterProfile.src = "hoodedFigure3.png";
+hoodedCharacterProfile.src = "visitorPx.png";
 hoodedCharacterProfile.style.marginBottom = '-4px';
 hoodedCharacterProfile.style.marginLeft = '3px';
 
@@ -48,8 +67,8 @@ let textPrompts = [
 let dialogBox = document.querySelector('.dialogBox')
 dialogBox.innerHTML = ""
 dialogBox.style.backgroundColor = "transparent";   
-dialogBox.style.height = "50px";   
-dialogBox.style.width = "400px";   
+//dialogBox.style.height = "50px";   
+//dialogBox.style.width = "400px";   
 dialogBox.style.color = "#cecee0";   
 
 function changeInnerText(innerText, delay)
@@ -59,14 +78,14 @@ function changeInnerText(innerText, delay)
     return (new Promise(resolve => {
         setTimeout(() => {
             dialogBox.innerHTML = innerText;
-            if (characterMovement === 0){
+            /*if (characterMovement === 0){
                 mainCharacterProfile.src = "robotCroppedFace6.png"
                 characterMovement = 1
             }
             else{
                 mainCharacterProfile.src = "robotCroppedFace5.png"
                 characterMovement = 0
-            }
+            }*/
             resolve("resolved")
         }, delay)
     }))
@@ -76,6 +95,7 @@ function timeout(ms) {
 }
 
 async function typeOutText(dialog){
+    //time to wait befor starting the next line of dialog passed in
     await timeout(1000)
     dialogBox.innerHTML = ""
     let tempDialog = ""
@@ -87,7 +107,8 @@ async function typeOutText(dialog){
     return 1;
 }
 
- async function typeOutMultiDialogs(diagArry){
+ async function typeOutMultiDialogs(diagArry, delayBeforeTextSequence){
+    await timeout(delayBeforeTextSequence)
     for (const diag of diagArry) {
         console.log(diag)
         await typeOutText(diag);
@@ -102,7 +123,7 @@ async function typeOutText(dialog){
       responseButton1.classList.add("RBActive")
       console.log("finished noah")
 }
-typeOutMultiDialogs(textPrompts)
+typeOutMultiDialogs(textPrompts,3000)
 //wrap this call in another function.
 //After dialog is finished, create response options
 
