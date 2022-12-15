@@ -114,22 +114,44 @@ async function pressedPromptButton(prompt){
     
 
 }
+function eventHandlers(){
+    console.log(this)
+    let whoAreYou = document.querySelector('.whoAreYou')
+    let showMeWhatYouGot = document.querySelector('.showMeWhatYouGot')
+    //Remove event listeners on click 
+    const whoAreYouClicked = async (e) => {
+        const elementClicked = e.target;
+        elementClicked.setAttribute('listener', 'true');
+        console.log('event has been attached');
+        await this.pressedPromptButton(whoAreYouPrompt)
+        document.querySelector('.robotName').classList.add("robotNameKnown")
+
+        //whoAreYou.removeEventListener("click", clicked, false);
+    }
+    if (whoAreYou.getAttribute('listener') !== 'true') {
+        whoAreYou.addEventListener("click", whoAreYouClicked, false);
+    }
+
+    const showMeWhatYouGotClicked = async (e) => {
+        const elementClicked = e.target;
+        elementClicked.setAttribute('listener', 'true');
+        console.log('event has been attached');
+        await this.pressedPromptButton(showMeWhatYouGotPrompt)
+        document.querySelector('.middleSection').classList.add("show")
+
+    }
+    if (showMeWhatYouGot.getAttribute('listener') !== 'true') {
+        showMeWhatYouGot.addEventListener("click", showMeWhatYouGotClicked, false);
+    }
+   
+
+}
 
 function userPrompts(){
     //Sets class that reveals buttons
     responseButton1.classList.add("RBActive")
     //Adds event handler that for questions
-    let whoAreYou = document.querySelector('.whoAreYou')
-    let aboutYourself = document.querySelector('.aboutYourself')
-    //Remove event listeners on click 
-    const clicked = async () => {
-        await this.pressedPromptButton(whoAreYouPrompt)
-        document.querySelector('.robotName').classList.add("robotNameKnown")
-
-        whoAreYou.removeEventListener("click", clicked, false);
-    }
-
-    whoAreYou.addEventListener("click", clicked, false);
+    eventHandlers.bind(this)()
     
 
 }
@@ -158,17 +180,22 @@ const visitorCharacter = new CharacterProfile('.visitorProfileImg', 'visitorPx.p
 const mainCharacterChat = new Chat('.robotDialogBox')
 mainCharacterChat.typeOutMultiDialogs(textPrompts, 3000)
 
-const visitorChat = new Chat('.visitorDialogBox')
-visitorChat.typeOutMultiDialogs(textPrompts, 3000)
+//const visitorChat = new Chat('.visitorDialogBox')
+//visitorChat.typeOutMultiDialogs(textPrompts, 3000)
 
-const middleSectionChat = new Chat('.middleSection')
-middleSectionChat.typeOutMultiDialogs(textPrompts, 3000)
+//const middleSectionChat = new Chat('.middleSection')
+//middleSectionChat.typeOutMultiDialogs(textPrompts, 3000)
 
 let whoAreYouPrompt = [
     'My name...',
     "In my past life I was known as Noah...",
     "But I've been going by the alias Human3rr as long as I can remember",
     "Any other questions?"
+]
+
+let showMeWhatYouGotPrompt = [
+    'Ah, so you want me to show you what I can do.',
+    "Well, if that's the case, here's a sample of what I can achieve",
 ]
 
 
