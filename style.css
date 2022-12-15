@@ -63,7 +63,7 @@ hr {
     border: 3px solid var(--main-txt-color);
     background-color: transparent;
     border-radius: 10px;
-    margin-right: 10px;
+    /*margin-right: 10px;*/
     margin-bottom: 5px;
     width: fit-content;
 }
@@ -123,14 +123,18 @@ hr {
     /*border: dashed red;*/
     justify-self: center;
 }
-
+.robotName.robotNameKnown{
+    visibility: visible;
+    animation: fadeIn 2s;
+}
 .robotName{
     color: var(--main-txt-color);
     /*border: dashed red;*/
     text-align: center;
-    width:fit-content;
+    /*width:fit-content;*/
+    visibility: hidden;
 }
-.dialogBox{
+.robotDialogBox{
     /*padding-left: 10px;*/
     justify-self: center;
 }
@@ -138,6 +142,15 @@ button{
     color: var(--main-txt-color);
     background-color: transparent;
 }
+.hoodedName{
+    text-align: center;
+}
 .redirectToPortfolio{
     grid-area: 1 / 2 / 2 / 3;
+}
+.middleSection{
+    grid-area: 2 / 2 / 3 / 3;
+    /*width: 100px;
+    height: 100px;
+    background-color: red;*/
 }
