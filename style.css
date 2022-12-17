@@ -25,6 +25,8 @@ body {
     justify-items: center;
     grid-template-columns: 1fr 1fr 1fr;
     grid-template-rows: 10vh 50vh 40vh;
+    width: 100%;
+    max-width: 10000px;
 }
 
 hr {
