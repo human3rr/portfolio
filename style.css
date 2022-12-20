@@ -190,6 +190,7 @@ button{
 	font: inherit;
 	cursor: pointer;
 	outline: inherit;
+    display: block;
 }
 button:hover{
     transform: translateX(5px);
@@ -218,7 +219,24 @@ button:hover{
     /*position: absolute;*/
     width: 100%;
     height: 100%;
+    justify-self: center;
     /*width: 100px;
     height: 100px;
     background-color: red;*/
+}
+.middleChat{
+    text-align: center;
+}
+.darkText{
+    color:#10101a;
+}
+.lightText{
+    color:var(--main-txt-color);
+}
+.motivationTracker{
+    text-align: left;
+    left: 0%;
+}
+.closeButton{
+    align: right;
 }
