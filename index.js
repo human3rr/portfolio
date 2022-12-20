@@ -19,6 +19,7 @@ for (let i = 0; i < counter; i++) {
 //Robot Section fade in
 let robotSection = document.querySelector('.robotSection')
 
+
 setTimeout(() => {
     robotSection.classList.add("RSActive")
 }, 1000)
@@ -48,19 +49,68 @@ function CharacterProfile(documentClassName, filename){
     At as in understood an remarkably solicitude. Mean them very seen she she. Use totally written the observe pressed justice. Instantly cordially far intention recommend estimable yet her his. Ladies stairs enough esteem add fat all enable. Needed its design number winter see. Oh be me sure wise sons no. Piqued ye of am spirit regret. Stimulated discretion impossible admiration in particular conviction up.
     He as compliment unreserved projecting. Between had observe pretend delight for believe. Do newspaper questions consulted sweetness do. Our sportsman his unwilling fulfilled departure law. Now world own total saved above her cause table. Wicket myself her square remark the should far secure sex. Smiling cousins warrant law explain for whether.
     `*/
-/*let textPrompts = [
+
+let introductionPrompt = [
+    'blah blah blah',
+]
+let textPrompts = [
+    'yo',
+]
+let whoAreYouPrompt = [
+    'My name...',
+]
+let showMeWhatYouGotPrompt = [
+    'show you what I can do.',
+]
+
+/*
+let textPrompts = [
     'Welcome weary traveler...',
     "It's unexpected to receive visiters this time of year.",
     "Ah. But nonetheless it's a welcome visit.",
     "What may I do for you?",
-]*/
-let textPrompts = [
-    'yo',
 ]
 
+let introductionPrompt = [
+    'While wondering the cyberspace you come upon a strange place',
+    'You sense that there is someone nearing you',
+    'Who or what could it be',
+    ''
+]
+let whoAreYouPrompt = [
+    'My name...',
+    "In my past life I was known as Noah...",
+    "But I've been going by the alias Human3rr as long as I can remember",
+    "Any other questions?"
+]
+
+let showMeWhatYouGotPrompt = [
+    'Ah, so you want me to show you what I can do.',
+    "Well, if that's the case, here's a sample of what I can achieve",
+]
+
+aboutYourself = [
+    "I hail from Austin, Texas",
+    "I took an interest in technology from a young age",
+    "I ended up studying electrical engineering and followed a career of embedded programming",
+    "Now my interests lie with web development",
+    "I'm currently seeking a role to hone the craft and create tools for the public to interact with",
+]
+
+whatAbilitiesDoYouHave = [
+    "The majority of my experience lends itself to enterprise level software development",
+    "Specifically, I have a lot of experience writing software for embedded microprocessors which manages servers which they reside on",
+    "Experience aside, I possess these skills which I believe can be useful in a web development position:\n
+    HTML/CSS/JavaScript\n
+    React, node.js, express\n
+    MySQL, MongoDB\n
+    Docker, OpenSSL\n
+    Linux"
+]
+*/
 function Chat(documentClassName){
     this.dialogBox = document.querySelector(documentClassName)
-    this.dialogBox.innerHTML = ""
+    this.dialogBox.innerText = ""
     this.dialogBox.style.backgroundColor = "transparent";
     this.dialogBox.style.color = "#cecee0";   
     this.changeInnerText = changeInnerText;
@@ -137,7 +187,7 @@ function eventHandlers(){
         elementClicked.setAttribute('listener', 'true');
         console.log('event has been attached');
         await this.pressedPromptButton(showMeWhatYouGotPrompt)
-        document.querySelector('.middleSection').classList.add("show")
+        document.querySelector('.carousel').classList.add("show")
 
     }
     if (showMeWhatYouGot.getAttribute('listener') !== 'true') {
@@ -174,29 +224,33 @@ function userPrompts(){
       console.log("finished noah")
 }
 
-const mainCharacter = new CharacterProfile('.robotProfile', 'robotPx.png')
-const visitorCharacter = new CharacterProfile('.visitorProfileImg', 'visitorPx.png')
 
-const mainCharacterChat = new Chat('.robotDialogBox')
-mainCharacterChat.typeOutMultiDialogs(textPrompts, 3000)
+
+
+async function setup(){
+    const middleSectionChat = new Chat('.middleChat')
+    await middleSectionChat.typeOutMultiDialogs(introductionPrompt, 3000)
+    
+    const mainCharacter = new CharacterProfile('.robotProfile', 'robotPx.png')
+    const visitorCharacter = new CharacterProfile('.visitorProfileImg', 'visitorPx.png')
+    let visitorSection = document.querySelector('.visitorSection')
+    visitorSection.classList.add("show")
+
+    let mainProfile = document.querySelector('.mainProfile')
+    mainProfile.classList.add("show")
+
+    const mainCharacterChat = new Chat('.robotDialogBox')
+    mainCharacterChat.typeOutMultiDialogs(textPrompts, 3000)
+
+}
+
+setup()
 
 //const visitorChat = new Chat('.visitorDialogBox')
 //visitorChat.typeOutMultiDialogs(textPrompts, 3000)
 
-//const middleSectionChat = new Chat('.middleSection')
-//middleSectionChat.typeOutMultiDialogs(textPrompts, 3000)
 
-let whoAreYouPrompt = [
-    'My name...',
-    "In my past life I was known as Noah...",
-    "But I've been going by the alias Human3rr as long as I can remember",
-    "Any other questions?"
-]
 
-let showMeWhatYouGotPrompt = [
-    'Ah, so you want me to show you what I can do.',
-    "Well, if that's the case, here's a sample of what I can achieve",
-]
 
 
 //typeOutMultiDialogs(textPrompts,3000)

@@ -108,14 +108,21 @@ hr {
     animation: fadeIn 2s;
 }
 .visitorSection{
+    visibility: hidden;
+}
+.visitorSection.show{
     animation: fadeIn 2s;
     grid-area: 2 / 3 / 3 / 4;
     justify-self: center;
     align-self: start;
+    visibility: visible;
     /*display: grid;
     grid-template-columns: 1fr;
     grid-template-rows: 1fr 1fr;*/
 }
+
+
+
 .robotSection{
     visibility: hidden;
     /*justify-self: stretch;*/
@@ -133,7 +140,7 @@ hr {
 }
 .robotSection.RSActive{
     visibility: visible;
-    animation: fadeIn 2s;
+    /*animation: fadeIn 2s;*/
     /*justify-self: stretch;*/
 
 }
@@ -141,8 +148,13 @@ hr {
 /*.profileBorder{
     border: dashed red;
 }*/
+.mainProfile.show{
+    animation: fadeIn 2s ;
+    visibility: visible;
+}
 .mainProfile{
     /*border: dashed red;*/
+    visibility: hidden;
     justify-self: center;
 }
 .visitorProfile{
@@ -176,6 +188,12 @@ button{
 .redirectToPortfolio{
     grid-area: 1 / 2 / 2 / 3;
 }
+.carousel.show{
+    visibility: visible;
+}
+.carousel{
+    visibility: hidden;
+}
 .middleSection.show{
     display: block;
     animation: fadeIn 2s;
@@ -183,7 +201,7 @@ button{
 }
 .middleSection{
     grid-area: 2 / 2 / 3 / 3;
-    display: none;
+    /*display: none;*/
     /*position: absolute;*/
     width: 100%;
     height: 100%;
