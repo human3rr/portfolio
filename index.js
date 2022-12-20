@@ -4,6 +4,8 @@
 */
 
 //Logic for rain elements
+
+
 let hrElement;
 let counter = 200;
 for (let i = 0; i < counter; i++) {
@@ -50,6 +52,7 @@ function CharacterProfile(documentClassName, filename){
     He as compliment unreserved projecting. Between had observe pretend delight for believe. Do newspaper questions consulted sweetness do. Our sportsman his unwilling fulfilled departure law. Now world own total saved above her cause table. Wicket myself her square remark the should far secure sex. Smiling cousins warrant law explain for whether.
     `*/
 
+/*
 let introductionPrompt = [
     'blah blah blah',
 ]
@@ -61,9 +64,9 @@ let whoAreYouPrompt = [
 ]
 let showMeWhatYouGotPrompt = [
     'show you what I can do.',
-]
+]*/
 
-/*
+
 let textPrompts = [
     'Welcome weary traveler...',
     "It's unexpected to receive visiters this time of year.",
@@ -89,7 +92,7 @@ let showMeWhatYouGotPrompt = [
     "Well, if that's the case, here's a sample of what I can achieve",
 ]
 
-aboutYourself = [
+let aboutYourselfPrompt = [
     "I hail from Austin, Texas",
     "I took an interest in technology from a young age",
     "I ended up studying electrical engineering and followed a career of embedded programming",
@@ -97,17 +100,24 @@ aboutYourself = [
     "I'm currently seeking a role to hone the craft and create tools for the public to interact with",
 ]
 
-whatAbilitiesDoYouHave = [
+let whatAbilitiesDoYouHavePrompt = [
     "The majority of my experience lends itself to enterprise level software development",
     "Specifically, I have a lot of experience writing software for embedded microprocessors which manages servers which they reside on",
-    "Experience aside, I possess these skills which I believe can be useful in a web development position:\n
-    HTML/CSS/JavaScript\n
-    React, node.js, express\n
-    MySQL, MongoDB\n
-    Docker, OpenSSL\n
-    Linux"
+    "Experience aside, I possess these skills which I believe can be useful in a web development position:<br/><br/>HTML/CSS/JavaScript<br/>React, node.js, express<br/>MySQL, MongoDB<br/>Docker, OpenSSL<br/>Linux"
 ]
-*/
+let contactPrompt = [
+    "If you able to access the ability <em>email</em> then you can reach me at the following address:<br/>noah.t.brewer@gmail.com<br/>If you would like to speak with me and you possess the item <em>cellular device</em>, you may contact me at the following number:<br/>512-517-8344<br/>My normal hours of operation are between 10am-6pm CST."
+]
+let goodbyePrompt = [
+    'I appreciate our meeting',
+    'I will guide you out to the nearest search engine',
+    'Goodbye.'
+]
+let workHistoryPrompt = [
+    'Hmm. You want a document with my work history?',
+    "Let's see. Okay I'll send it to you.",
+    "It should appear in the next tab"
+]
 function Chat(documentClassName){
     this.dialogBox = document.querySelector(documentClassName)
     this.dialogBox.innerText = ""
@@ -149,13 +159,34 @@ async function typeOutText(dialog){
     console.log(this)
     this.dialogBox.innerHTML = ""
     let tempDialog = ""
-    let i = 50
+    let typewriterSpeed = 0
     for(let c of dialog){
         tempDialog = tempDialog + c
-        await this.changeInnerText(tempDialog, i)
+        await this.changeInnerText(tempDialog, typewriterSpeed)
     }
     return 1;
 }
+
+const download = (path, filename) => {
+    // Create a new link
+    const anchor = document.createElement('a');
+    anchor.href = path;
+    //anchor.download = filename;
+    anchor.setAttribute('download', filename);
+    anchor.setAttribute('target', '_blank');
+
+
+    console.log(anchor)
+    // Append to the DOM
+    document.body.appendChild(anchor);
+
+    // Trigger `click` event
+    anchor.click();
+
+    // Remove element from DOM
+    document.body.removeChild(anchor);
+}; 
+
 
 async function pressedPromptButton(prompt){
     console.log("pressedPromptButton")
@@ -168,6 +199,7 @@ function eventHandlers(){
     console.log(this)
     let whoAreYou = document.querySelector('.whoAreYou')
     let showMeWhatYouGot = document.querySelector('.showMeWhatYouGot')
+    let whatAbilitiesDoYouHave = document.querySelector('.whatAbilitiesDoYouHave')
     //Remove event listeners on click 
     const whoAreYouClicked = async (e) => {
         const elementClicked = e.target;
@@ -191,10 +223,86 @@ function eventHandlers(){
 
     }
     if (showMeWhatYouGot.getAttribute('listener') !== 'true') {
+        console.log('showMeWhatYouGotClicked');
         showMeWhatYouGot.addEventListener("click", showMeWhatYouGotClicked, false);
     }
    
 
+    const whatAbilitiesDoYouHaveClicked = async (e) => {
+        const elementClicked = e.target;
+        elementClicked.setAttribute('listener', 'true');
+        console.log('event has been attached');
+        await this.pressedPromptButton(whatAbilitiesDoYouHavePrompt)
+
+        //whoAreYou.removeEventListener("click", clicked, false);
+    }
+    if (whatAbilitiesDoYouHave.getAttribute('listener') !== 'true') {
+        console.log('whatAbilitiesDoYouHaveClicked');
+        whatAbilitiesDoYouHave.addEventListener("click", whatAbilitiesDoYouHaveClicked, false);
+    }
+
+    let aboutYourself = document.querySelector('.aboutYourself')
+    const aboutYourselfClicked = async (e) => {
+        const elementClicked = e.target;
+        elementClicked.setAttribute('listener', 'true');
+        console.log('event has been attached');
+        await this.pressedPromptButton(aboutYourselfPrompt)
+
+        //whoAreYou.removeEventListener("click", clicked, false);
+    }
+    if (aboutYourself.getAttribute('listener') !== 'true') {
+        console.log('aboutYourselfClicked');
+        aboutYourself.addEventListener("click", aboutYourselfClicked, false);
+    }
+
+    let contact = document.querySelector('.contact')
+    const contactClicked = async (e) => {
+        const elementClicked = e.target;
+        elementClicked.setAttribute('listener', 'true');
+        console.log('event has been attached');
+        await this.pressedPromptButton(contactPrompt)
+
+        //whoAreYou.removeEventListener("click", clicked, false);
+    }
+    if (contact.getAttribute('listener') !== 'true') {
+        console.log('contactClicked');
+        contact.addEventListener("click", contactClicked, false);
+    }
+
+    
+
+    let goodbye = document.querySelector('.goodbye')
+    const goodbyeClicked = async (e) => {
+        const elementClicked = e.target;
+        elementClicked.setAttribute('listener', 'true');
+        console.log('event has been attached');
+        await this.pressedPromptButton(goodbyePrompt)
+        await timeout(500)
+        location.href = "https://www.google.com/";
+        
+        //whoAreYou.removeEventListener("click", clicked, false);
+    }
+    if (goodbye.getAttribute('listener') !== 'true') {
+        console.log('contactClicked');
+        goodbye.addEventListener("click", goodbyeClicked, false);
+    }
+
+    let workHistory = document.querySelector('.workHistory')
+    const workHistoryClicked = async (e) => {
+        const elementClicked = e.target;
+        elementClicked.setAttribute('listener', 'true');
+        console.log('event has been attached');
+        await this.pressedPromptButton(workHistoryPrompt)
+        await timeout(500)
+        download('NoahBrewerResume.pdf', '');
+        //location.href = "https://www.google.com/";
+        
+        //whoAreYou.removeEventListener("click", clicked, false);
+    }
+    if (workHistory.getAttribute('listener') !== 'true') {
+        console.log('contactClicked');
+        workHistory.addEventListener("click", workHistoryClicked, false);
+    }
 }
 
 function userPrompts(){
@@ -229,7 +337,7 @@ function userPrompts(){
 
 async function setup(){
     const middleSectionChat = new Chat('.middleChat')
-    await middleSectionChat.typeOutMultiDialogs(introductionPrompt, 3000)
+    await middleSectionChat.typeOutMultiDialogs(introductionPrompt, 1000)
     
     const mainCharacter = new CharacterProfile('.robotProfile', 'robotPx.png')
     const visitorCharacter = new CharacterProfile('.visitorProfileImg', 'visitorPx.png')
