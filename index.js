@@ -159,7 +159,7 @@ async function typeOutText(dialog){
     console.log(this)
     this.dialogBox.innerHTML = ""
     let tempDialog = ""
-    let typewriterSpeed = 0
+    let typewriterSpeed = 30
     for(let c of dialog){
         tempDialog = tempDialog + c
         await this.changeInnerText(tempDialog, typewriterSpeed)
@@ -203,7 +203,6 @@ function eventHandlers(){
     //Remove event listeners on click 
     const whoAreYouClicked = async (e) => {
         const elementClicked = e.target;
-        elementClicked.setAttribute('listener', 'true');
         console.log('event has been attached');
         await this.pressedPromptButton(whoAreYouPrompt)
         document.querySelector('.robotName').classList.add("robotNameKnown")
@@ -212,25 +211,40 @@ function eventHandlers(){
     }
     if (whoAreYou.getAttribute('listener') !== 'true') {
         whoAreYou.addEventListener("click", whoAreYouClicked, false);
+        whoAreYou.setAttribute('listener', 'true');
+
     }
 
     const showMeWhatYouGotClicked = async (e) => {
         const elementClicked = e.target;
-        elementClicked.setAttribute('listener', 'true');
         console.log('event has been attached');
         await this.pressedPromptButton(showMeWhatYouGotPrompt)
         document.querySelector('.carousel').classList.add("show")
+        let closeButton = document.querySelector('.closeButton')
+        
+        const closeButtonClicked = async (e) => {
+            const elementClicked = e.target;
+            console.log('event has been attached');
+            document.querySelector('.carousel').classList.remove("show")
+        }
+        if (closeButton.getAttribute('listener') !== 'true') {
+            console.log('contactClicked');
+            closeButton.addEventListener("click", closeButtonClicked, false);
+            closeButton.setAttribute('listener', 'true');
+
+        }
 
     }
     if (showMeWhatYouGot.getAttribute('listener') !== 'true') {
         console.log('showMeWhatYouGotClicked');
         showMeWhatYouGot.addEventListener("click", showMeWhatYouGotClicked, false);
+        showMeWhatYouGot.setAttribute('listener', 'true');
+
     }
    
 
     const whatAbilitiesDoYouHaveClicked = async (e) => {
         const elementClicked = e.target;
-        elementClicked.setAttribute('listener', 'true');
         console.log('event has been attached');
         await this.pressedPromptButton(whatAbilitiesDoYouHavePrompt)
 
@@ -239,12 +253,13 @@ function eventHandlers(){
     if (whatAbilitiesDoYouHave.getAttribute('listener') !== 'true') {
         console.log('whatAbilitiesDoYouHaveClicked');
         whatAbilitiesDoYouHave.addEventListener("click", whatAbilitiesDoYouHaveClicked, false);
+        whatAbilitiesDoYouHave.setAttribute('listener', 'true');
+
     }
 
     let aboutYourself = document.querySelector('.aboutYourself')
     const aboutYourselfClicked = async (e) => {
         const elementClicked = e.target;
-        elementClicked.setAttribute('listener', 'true');
         console.log('event has been attached');
         await this.pressedPromptButton(aboutYourselfPrompt)
 
@@ -253,12 +268,13 @@ function eventHandlers(){
     if (aboutYourself.getAttribute('listener') !== 'true') {
         console.log('aboutYourselfClicked');
         aboutYourself.addEventListener("click", aboutYourselfClicked, false);
+        aboutYourself.setAttribute('listener', 'true');
+
     }
 
     let contact = document.querySelector('.contact')
     const contactClicked = async (e) => {
         const elementClicked = e.target;
-        elementClicked.setAttribute('listener', 'true');
         console.log('event has been attached');
         await this.pressedPromptButton(contactPrompt)
 
@@ -267,6 +283,8 @@ function eventHandlers(){
     if (contact.getAttribute('listener') !== 'true') {
         console.log('contactClicked');
         contact.addEventListener("click", contactClicked, false);
+        contact.setAttribute('listener', 'true');
+
     }
 
     
@@ -274,7 +292,6 @@ function eventHandlers(){
     let goodbye = document.querySelector('.goodbye')
     const goodbyeClicked = async (e) => {
         const elementClicked = e.target;
-        elementClicked.setAttribute('listener', 'true');
         console.log('event has been attached');
         await this.pressedPromptButton(goodbyePrompt)
         await timeout(500)
@@ -285,12 +302,13 @@ function eventHandlers(){
     if (goodbye.getAttribute('listener') !== 'true') {
         console.log('contactClicked');
         goodbye.addEventListener("click", goodbyeClicked, false);
+        goodbye.setAttribute('listener', 'true');
+
     }
 
     let workHistory = document.querySelector('.workHistory')
     const workHistoryClicked = async (e) => {
         const elementClicked = e.target;
-        elementClicked.setAttribute('listener', 'true');
         console.log('event has been attached');
         await this.pressedPromptButton(workHistoryPrompt)
         await timeout(500)
@@ -302,7 +320,12 @@ function eventHandlers(){
     if (workHistory.getAttribute('listener') !== 'true') {
         console.log('contactClicked');
         workHistory.addEventListener("click", workHistoryClicked, false);
+        workHistory.setAttribute('listener', 'true');
+
     }
+
+    
+    
 }
 
 function userPrompts(){
