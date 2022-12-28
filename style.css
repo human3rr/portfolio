@@ -251,3 +251,8 @@ a{
     z-index: 5;
     position: relative;
 }
+.carousel-caption {
+    position: relative;
+    left: auto;
+    right: auto;
+}
