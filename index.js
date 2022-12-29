@@ -68,55 +68,47 @@ let showMeWhatYouGotPrompt = [
 
 
 let textPrompts = [
-    'Welcome weary traveler...',
-    "It's unexpected to receive visiters this time of year.",
-    "Ah. But nonetheless it's a welcome visit.",
-    "What may I do for you?",
+    "Welcome weary traveler... <br/> It's unexpected to receive visiters this time of year. <br/> Ah. But nonetheless it's a welcome visit. <br/>What may I do for you?"
 ]
 
 let introductionPrompt = [
-    'While wondering the cyberspace you come upon a strange place',
-    'You sense that there is someone nearing you',
-    'Who or what could it be',
+    'While wondering the cyberspace you come upon a strange place. <br/>\
+    You sense that there is someone nearing you.<br/>\
+    Who or what could it be?',
     ''
 ]
 let whoAreYouPrompt = [
-    'My name...',
-    "In my past life I was known as Noah...",
-    "But I've been going by the alias Human3rr as long as I can remember",
-    "Any other questions?"
+    "My name... <br/>In my past life I was known as Noah...<br/>\
+    But I've been going by the alias Human3rr as long as I can remember.\
+    <br/>Any other questions?"
 ]
 
 let showMeWhatYouGotPrompt = [
-    'Ah, so you want me to show you what I can do.',
-    "Well, if that's the case, here's a sample of what I can achieve",
+    "Ah, so you want me to show you what I can do.<br/>Well, if that's the case, here's a sample of what I can achieve.<br/><br/>Follow the links to demo them.",
 ]
 
 let aboutYourselfPrompt = [
-    "I hail from Austin, Texas",
-    "I took an interest in technology from a young age",
-    "I ended up studying electrical engineering and followed a career of embedded programming",
-    "Now my interests lie with web development",
-    "I'm currently seeking a role to hone the craft and create tools for the public to interact with",
+    "I hail from Austin, Texas<br/>I took an interest in technology from a young age<br/>I ended up studying electrical engineering and followed a career of embedded programming<br/>\
+    Now my interests lie with web development<br/>I'm currently seeking a role to hone the craft and create tools for the public to interact with",
 ]
 
 let whatAbilitiesDoYouHavePrompt = [
-    "The majority of my experience lends itself to enterprise level software development",
-    "Specifically, I have a lot of experience writing software for embedded microprocessors which manages servers which they reside on",
-    "Experience aside, I possess these skills which I believe can be useful in a web development position:<br/><br/>HTML/CSS/JavaScript<br/>React, node.js, express<br/>MySQL, MongoDB<br/>Docker, OpenSSL<br/>Linux"
+    "The majority of my experience lends itself to enterprise level software development.<br/>\
+    Specifically, I have a lot of experience writing software for embedded microprocessors which manage servers (authentication, authorization, session management, SSL).<br/><br/>\
+    Experience aside, I possess these skills which I believe can be useful in a web development position:<br/><br/>HTML/CSS/JavaScript<br/>React, node.js, express<br/>MySQL, MongoDB<br/>Docker, OpenSSL<br/>Linux"
 ]
 let contactPrompt = [
-    "If you able to access the ability <em>email</em> then you can reach me at the following address:<br/>noah.t.brewer@gmail.com<br/>If you would like to speak with me and you possess the item <em>cellular device</em>, you may contact me at the following number:<br/>512-517-8344<br/>My normal hours of operation are between 10am-6pm CST."
+    "If you able to access the ability <em>email</em> then you can reach me at the following address:<br/><br/>\
+    noah.t.brewer@gmail.com<br/><br/>If you would like to speak with me and you possess the item <em>cellular device</em>, you may contact me at the following number:<br/><br/>\
+    512-517-8344<br/><br/>My normal hours of operation are between 10am-6pm CST."
 ]
 let goodbyePrompt = [
-    'I appreciate our meeting',
-    'I will guide you out to the nearest search engine',
-    'Goodbye.'
+    'I appreciate our meeting<br/>\
+    I will guide you out to the nearest search engine<br/>\
+    Goodbye.', ''
 ]
 let workHistoryPrompt = [
-    'Hmm. You want a document with my work history?',
-    "Let's see. Okay I'll send it to you.",
-    "It should appear in the next tab"
+    "Hmm. You want a document with my work history?<br/>Let's see. Okay I'll send it to you.<br/>It should appear in the next tab"
 ]
 function Chat(documentClassName){
     this.dialogBox = document.querySelector(documentClassName)
@@ -159,7 +151,7 @@ async function typeOutText(dialog){
     console.log(this)
     this.dialogBox.innerHTML = ""
     let tempDialog = ""
-    let typewriterSpeed = 30
+    let typewriterSpeed = 20
     for(let c of dialog){
         tempDialog = tempDialog + c
         await this.changeInnerText(tempDialog, typewriterSpeed)
@@ -336,7 +328,7 @@ function userPrompts(){
     
 
 }
- async function typeOutMultiDialogs(diagArry, delayBeforeTextSequence){
+ async function typeOutMultiDialogs(diagArry, delayBeforeTextSequence, pauseBeforeNextLine=0){
     console.log("typeOutMultiDialogs")
     console.log(this)
     await timeout(delayBeforeTextSequence)
@@ -344,6 +336,7 @@ function userPrompts(){
         console.log(diag)
         await this.typeOutText(diag);
         console.log("finished type out text")
+        await timeout(pauseBeforeNextLine)
       }
       //Display user prompts after main character finished speaking
       console.log("check out here")
@@ -360,7 +353,7 @@ function userPrompts(){
 
 async function setup(){
     const middleSectionChat = new Chat('.middleChat')
-    await middleSectionChat.typeOutMultiDialogs(introductionPrompt, 1000)
+    await middleSectionChat.typeOutMultiDialogs(introductionPrompt, 1000, 2000)
     
     const mainCharacter = new CharacterProfile('.robotProfile', 'robotPx.png')
     const visitorCharacter = new CharacterProfile('.visitorProfileImg', 'visitorPx.png')
@@ -371,7 +364,7 @@ async function setup(){
     mainProfile.classList.add("show")
 
     const mainCharacterChat = new Chat('.robotDialogBox')
-    mainCharacterChat.typeOutMultiDialogs(textPrompts, 3000)
+    mainCharacterChat.typeOutMultiDialogs(textPrompts, 3000, 500)
 
 }
 
