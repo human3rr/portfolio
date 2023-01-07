@@ -18,6 +18,12 @@ for (let i = 0; i < counter; i++) {
   document.body.appendChild(hrElement);
 }
 
+
+let redirectToClassicPortfolio = document.querySelector('.redirectToClassicPortfolio')
+redirectToClassicPortfolio.addEventListener("click", () => {
+    location.href = 'classicportfolio/';
+});
+
 //Robot Section fade in
 let robotSection = document.querySelector('.robotSection')
 
